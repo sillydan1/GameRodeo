@@ -4,12 +4,14 @@ using System.Collections;
 public class BaseAI : MonoBehaviour 
 {
     public AIBehavior myBehavior;
+    public float speed = 0.9f;
     public float attackRange = 5;
     public float damage = 15;
     public float visibleRange = 10;
     public float attackDroneSpawnDistance = 10;
     public float maxVisible = 10;
     public GameObject attackers;
+    public int[] weaknesses;
     private float interval = 0;
     private float oldCamSize = 0;
     private bool haveAttacked = false;
@@ -44,7 +46,7 @@ public class BaseAI : MonoBehaviour
             //follow the object
             Vector2 myDir = myObject.transform.position - transform.position;
             myDir.Normalize();
-            myDir *= 0.3f;
+            myDir *= speed;
             myRigid.AddForce(myDir, ForceMode2D.Force);
             #endregion
         }
@@ -52,18 +54,40 @@ public class BaseAI : MonoBehaviour
         {
             #region Aggressive
             //Move Toward the player!
-            Vector2 myDir = myObject.transform.position - transform.position;
-            myDir.Normalize();
-            myDir *= 30f;
-            myRigid.AddForce(myDir, ForceMode2D.Force);
-            //If you get close enough, Damage him and self destruct!
-            float dist = Vector2.Distance(transform.position, myObject.transform.position);
-            if(dist < attackRange)
+            if (!haveAttacked)
             {
-                myObject.GetComponent<PlayerHP>().ChangeHP(-damage);
-                //Spawn an explotion or whatever...
-
-                Destroy(gameObject);
+                Vector2 myDir = myObject.transform.position - transform.position;
+                myDir.Normalize();
+                myDir *= speed;
+                myRigid.AddForce(myDir, ForceMode2D.Force);
+                //If you get close enough, Damage him and self destruct!
+                float dist = Vector2.Distance(transform.position, myObject.transform.position);
+                if (dist < attackRange)
+                {
+                    bool didHit = myObject.GetComponent<PlayerHP>().ChangeHP(-damage);
+                    //Spawn an explotion or whatever...
+                    if (didHit)
+                        Destroy(gameObject);
+                    else
+                    {
+                        //Flee for a while
+                        haveAttacked = true;
+                        interval = Time.time + 3;
+                    }
+                }
+            }
+            else
+            {
+                //Flee
+                Vector2 myDir = transform.position - myObject.transform.position;
+                myDir.Normalize();
+                myDir *= speed / 1.5f;
+                myRigid.AddForce(myDir, ForceMode2D.Force);
+                //Check if we want to still flee or not
+                if(interval < Time.time)
+                {
+                    haveAttacked = false;
+                }
             }
             #endregion
         }
@@ -75,7 +99,7 @@ public class BaseAI : MonoBehaviour
             {
                 Vector2 myDir = myObject.transform.position - transform.position;
                 myDir.Normalize();
-                myDir *= 0.8f;
+                myDir *= speed;
                 myRigid.AddForce(myDir, ForceMode2D.Force);
             }
             else //The boss is within attack range.
@@ -87,14 +111,25 @@ public class BaseAI : MonoBehaviour
                 {
                     for (int i = 0; i < 10; i++)
                     {
-                        Vector3 randomPlayerPos = new Vector3(myObject.transform.position.x + Random.Range(-4f, 4f), myObject.transform.position.y + Random.Range(-4f, 4f), transform.position.z);
+                        Vector3 randomPlayerPos = new Vector3(myObject.transform.position.x + Random.Range(-7f, 7f), myObject.transform.position.y + Random.Range(-7f, 7f), transform.position.z);
                         Vector3 midSpawnArea = randomPlayerPos - transform.position;
                         midSpawnArea.Normalize();
-                        midSpawnArea *= (attackDroneSpawnDistance - 1);
-                        Instantiate(attackers, midSpawnArea, Quaternion.identity);
+                        
+                        midSpawnArea *= (attackDroneSpawnDistance + 1);
+                        midSpawnArea += transform.position;
+                        GameObject clone = Instantiate(attackers, midSpawnArea, Quaternion.identity) as GameObject;
+                        clone.GetComponent<Rigidbody2D>().AddForce((midSpawnArea - transform.position).normalized * Random.Range(12f, 20f), ForceMode2D.Impulse);
                     }
                     haveAttacked = true;
-                    interval = Time.time + 10;
+                    interval = Time.time + 4;
+                }
+                if(haveAttacked)
+                {
+                    if(interval < Time.time)
+                    {
+                        //Reset the ability to attack.
+                        haveAttacked = false;
+                    }
                 }
             }
             //Zoom out when the player is within the visibleRange range.
