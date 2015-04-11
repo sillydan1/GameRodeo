@@ -7,16 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3BABABCE-350F-0F2D-57C3-99564C0A8A65}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.0.0f4</UnityVersion>
@@ -56,9 +54,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MyStuff\Scripts\DieOverTime.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Enemy\AIBehavior.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Enemy\BaseAI.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Enemy\EnemyHP.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\FloaterPickUp.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Library.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Other\Acid.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Other\PowerUpType.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Other\Projectile.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Other\ProjectileType.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Other\Spike.cs" />
     <Compile Include="Assets\MyStuff\Scripts\PlayerScripts\PlayerAbilityHandler.cs" />
     <Compile Include="Assets\MyStuff\Scripts\PlayerScripts\PlayerHP.cs" />
     <Compile Include="Assets\MyStuff\Scripts\PlayerScripts\PlayerInventory.cs" />
