@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyHP : MonoBehaviour 
 {
@@ -10,7 +11,9 @@ public class EnemyHP : MonoBehaviour
     public GameObject healthBarPrefab;
     private GameObject myHealthBar;
     public GameObject deathPart;
+    public GameObject reward;
     private SpawnSystem mySpawner;
+    private BaseAI myAI;
 
     public void AssigneSpawner(SpawnSystem spawmer)
     {
@@ -19,6 +22,7 @@ public class EnemyHP : MonoBehaviour
     void Start()
     {
         Vector3 hpBarPos = transform.position;
+        myAI = GetComponent<BaseAI>();
         hpBarPos.y += yDisp;
         myHealthBar = Instantiate(healthBarPrefab, hpBarPos, Quaternion.identity) as GameObject;
         myHealthBar.transform.parent = gameObject.transform;
@@ -40,8 +44,29 @@ public class EnemyHP : MonoBehaviour
             hitPoints += amount;
             if (hitPoints <= 0)
             {
-                Destroy(gameObject);
+                if(mySpawner != null)
+                    mySpawner.RemoveOne(gameObject);
+
+                if(myAI.myBehavior == AIBehavior.boss)
+                {
+                    Camera.main.GetComponent<CameraHandler>().ChangeSizeTo(myAI.OriginalCamSize, 4);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Vector3 pos = transform.position;
+                        pos.x += Random.Range(-2f, 2f);
+                        pos.y += Random.Range(-2f, 2f);
+                        GameObject clone = Instantiate(reward, pos, Quaternion.identity) as GameObject;
+                        clone.GetComponent<Rigidbody2D>().AddForce((pos - transform.position).normalized * 5, ForceMode2D.Impulse);
+
+                        float myAngle = Vector3.Angle((pos - transform.position), clone.transform.up);
+                        if ((pos - transform.position).normalized.x < 0)
+                            myAngle = -myAngle;
+
+                        clone.transform.Rotate(Vector3.back, myAngle);
+                    }
+                }
                 Instantiate(deathPart, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
             return true;
         }

@@ -12,10 +12,18 @@ public class BaseAI : MonoBehaviour
     public float maxVisible = 10;
     public GameObject attackers;
     private float interval = 0;
-    private float oldCamSize = 0;
+    private float oldCamSize = 10;
     private bool haveAttacked = false;
     private GameObject myObject;
     private Rigidbody2D myRigid;
+
+    public float OriginalCamSize
+    {
+        get
+        {
+            return oldCamSize;
+        }
+    }
 
     void Start()
     {
@@ -27,8 +35,12 @@ public class BaseAI : MonoBehaviour
         else
             myObject = GameObject.FindGameObjectWithTag("Player");
 
-        oldCamSize = Camera.main.orthographicSize;
+        //oldCamSize = Camera.main.orthographicSize;
         myRigid = GetComponent<Rigidbody2D>();
+    }
+    public void Die()
+    {
+        Camera.main.orthographicSize = oldCamSize;
     }
     void Update()
     {
@@ -118,6 +130,7 @@ public class BaseAI : MonoBehaviour
                         midSpawnArea += transform.position;
                         GameObject clone = Instantiate(attackers, midSpawnArea, Quaternion.identity) as GameObject;
                         clone.GetComponent<Rigidbody2D>().AddForce((midSpawnArea - transform.position).normalized * Random.Range(12f, 20f), ForceMode2D.Impulse);
+
                     }
                     haveAttacked = true;
                     interval = Time.time + 4;

@@ -28,8 +28,8 @@ public class PlayerInventory : MonoBehaviour
     {
         slot1 = PowerUpType.None;
         slot2 = PowerUpType.None;
-        slot1UI = Camera.main.transform.FindChild("Slot1").GetComponent<Renderer>();
-        slot2UI = Camera.main.transform.FindChild("Slot2").GetComponent<Renderer>();
+        slot1UI = GameObject.Find("UICam").transform.FindChild("GUI").FindChild("Slot1").GetComponent<Renderer>();
+        slot2UI = GameObject.Find("UICam").transform.FindChild("GUI").FindChild("Slot2").GetComponent<Renderer>();
     }
     public string GetXYZValue()
     {
