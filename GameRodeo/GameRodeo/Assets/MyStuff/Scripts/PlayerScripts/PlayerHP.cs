@@ -10,6 +10,7 @@ public class PlayerHP : MonoBehaviour
     public float yDisp = 2;
     public GameObject healthBarPrefab;
     private GameObject myHealthBar;
+    private CameraHandler mainCam;
 
     public float HitPoints
     {
@@ -21,6 +22,7 @@ public class PlayerHP : MonoBehaviour
 
     private void Start()
     {
+        mainCam = Camera.main.GetComponent<CameraHandler>();
         myInventory = GetComponent<PlayerInventory>();
         pah = GetComponent<PlayerAbilityHandler>();
         Vector3 hpBarPos = transform.position;
@@ -39,6 +41,10 @@ public class PlayerHP : MonoBehaviour
 
         if (canGetHit)
         {
+            if (amount < 0)
+            {
+                mainCam.PlayDamage();
+            }
             hitPoints += amount;
             return true;
         }
