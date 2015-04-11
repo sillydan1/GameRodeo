@@ -11,7 +11,6 @@ public class BaseAI : MonoBehaviour
     public float attackDroneSpawnDistance = 10;
     public float maxVisible = 10;
     public GameObject attackers;
-    public int[] weaknesses;
     private float interval = 0;
     private float oldCamSize = 0;
     private bool haveAttacked = false;
