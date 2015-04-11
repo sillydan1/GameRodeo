@@ -23,6 +23,12 @@ public class SpawnSystem : MonoBehaviour
     //Layer is at what layer this spawnsystem is. It also dictates what Z position it will spawn the objects
     public int layer;
 
+    public void RemoveOne(GameObject you)
+    {
+        if (allObjects.Contains(you))
+            allObjects.Remove(you);
+        amountOfObjectsRightNow--;
+    }
     private void Start()
     {
         allObjects = new List<GameObject>();
@@ -39,6 +45,9 @@ public class SpawnSystem : MonoBehaviour
                 pos.x += transform.position.x;
                 pos.y += transform.position.y;
                 GameObject clone = Instantiate(allPrefabs[rnd], pos, Quaternion.identity) as GameObject;
+                if(clone.tag == "Enemy")
+                    clone.GetComponent<EnemyHP>().AssigneSpawner(this);
+
                 allObjects.Add(clone);
                 amountOfObjectsRightNow++;
             }
@@ -63,6 +72,9 @@ public class SpawnSystem : MonoBehaviour
                     pos.x += transform.position.x;
                     pos.y += transform.position.y;
                     GameObject clone = Instantiate(allPrefabs[rnd], pos, Quaternion.identity) as GameObject;
+                    if (clone.tag == "Enemy")
+                        clone.GetComponent<EnemyHP>().AssigneSpawner(this);
+
                     allObjects.Add(clone);
                     amountOfObjectsRightNow++;
                     timer = Time.time + 2;
@@ -83,6 +95,9 @@ public class SpawnSystem : MonoBehaviour
                         newPos.x += Random.Range(-2f, 2f);
                         newPos.y += Random.Range(-2f, 2f);
                         GameObject clone = Instantiate(allPrefabs[rnd], newPos, Quaternion.identity) as GameObject;
+                        if (clone.tag == "Enemy")
+                            clone.GetComponent<EnemyHP>().AssigneSpawner(this);
+
                         allObjects.Add(clone);
                         amountOfObjectsRightNow++;
                     }

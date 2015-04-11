@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
                 transform.position = stuckTrans.position + stuckOffset;
                 if (timer < Time.time)
                 {
-                    hitHP.ChangeHP(-2, "XY");
+                    hitHP.ChangeHP(-10, "XY");
                     timer = Time.time + 0.5f;
                 }
             }

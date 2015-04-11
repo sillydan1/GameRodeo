@@ -8,7 +8,7 @@ public class Spike : MonoBehaviour
         if(intruder.tag == "Enemy")
         {
             //Damage the fucker!
-            intruder.GetComponent<EnemyHP>().ChangeHP(-10, "XX");
+            intruder.GetComponent<EnemyHP>().ChangeHP(-60, "XX");
             //Check if we CAN knock the thing away.
             if (intruder.GetComponent<BaseAI>().myBehavior != AIBehavior.boss)
             {

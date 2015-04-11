@@ -7,6 +7,9 @@ public class PlayerHP : MonoBehaviour
     private float hitPoints = 100;
     private PlayerInventory myInventory;
     private PlayerAbilityHandler pah;
+    public float yDisp = 2;
+    public GameObject healthBarPrefab;
+    private GameObject myHealthBar;
 
     public float HitPoints
     {
@@ -20,6 +23,10 @@ public class PlayerHP : MonoBehaviour
     {
         myInventory = GetComponent<PlayerInventory>();
         pah = GetComponent<PlayerAbilityHandler>();
+        Vector3 hpBarPos = transform.position;
+        hpBarPos.y += yDisp;
+        myHealthBar = Instantiate(healthBarPrefab, hpBarPos, Quaternion.identity) as GameObject;
+        myHealthBar.transform.parent = gameObject.transform;
     }
     /// <summary>
     /// Changes the Hit points value and returns true if the player is invulnerable or not
@@ -46,5 +53,14 @@ public class PlayerHP : MonoBehaviour
     public void DeactivateInvincibility()
     {
         canGetHit = true;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y + yDisp, 0), 0.1f);
+    }
+    void Update()
+    {
+        myHealthBar.transform.localScale = new Vector3((hitPoints / 100) * 4, myHealthBar.transform.localScale.y, myHealthBar.transform.localScale.z);
     }
 }

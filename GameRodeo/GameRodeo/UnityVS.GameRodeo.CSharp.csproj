@@ -69,6 +69,7 @@
     <Compile Include="Assets\MyStuff\Scripts\Enemy\BaseAI.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Enemy\EnemyHP.cs" />
     <Compile Include="Assets\MyStuff\Scripts\FloaterPickUp.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\HPDecay.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Library.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Other\Acid.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Other\MusicFade.cs" />

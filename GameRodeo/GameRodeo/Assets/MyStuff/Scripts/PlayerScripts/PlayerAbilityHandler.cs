@@ -130,6 +130,9 @@ public class PlayerAbilityHandler : MonoBehaviour
             //Spit an acid spike projectile. (projectiles[1])
             GameObject clone = Instantiate(projectiles[1], transform.position + (movement.FaceDirection.normalized * 2f), Quaternion.identity) as GameObject;
             float myAngle = Vector3.Angle(movement.FaceDirection, clone.transform.up);
+            if (movement.FaceDirection.x < 0)
+                myAngle = -myAngle;
+
             clone.transform.Rotate(Vector3.back, myAngle);
             haveUsed = true;
         }
