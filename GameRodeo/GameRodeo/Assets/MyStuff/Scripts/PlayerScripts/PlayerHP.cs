@@ -9,7 +9,7 @@ public class PlayerHP : MonoBehaviour
     private PlayerAbilityHandler pah;
     public float yDisp = 2;
     public GameObject healthBarPrefab;
-    private GameObject myHealthBar;
+    public GameObject myHealthBar;
     private CameraHandler mainCam;
 
     public float HitPoints
@@ -27,8 +27,8 @@ public class PlayerHP : MonoBehaviour
         pah = GetComponent<PlayerAbilityHandler>();
         Vector3 hpBarPos = transform.position;
         hpBarPos.y += yDisp;
-        myHealthBar = Instantiate(healthBarPrefab, hpBarPos, Quaternion.identity) as GameObject;
-        myHealthBar.transform.parent = gameObject.transform;
+        //myHealthBar = Instantiate(healthBarPrefab, hpBarPos, Quaternion.identity) as GameObject;
+        //myHealthBar.transform.parent = gameObject.transform;
     }
     /// <summary>
     /// Changes the Hit points value and returns true if the player is invulnerable or not
@@ -67,6 +67,6 @@ public class PlayerHP : MonoBehaviour
     }
     void Update()
     {
-        myHealthBar.transform.localScale = new Vector3((hitPoints / 100) * 4, myHealthBar.transform.localScale.y, myHealthBar.transform.localScale.z);
+        myHealthBar.transform.localScale = new Vector3((hitPoints / 100) * 9.6f, myHealthBar.transform.localScale.y, myHealthBar.transform.localScale.z);
     }
 }

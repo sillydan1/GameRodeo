@@ -15,14 +15,14 @@ public class ColorAnimator : MonoBehaviour
             animated.material.color = colour;
         }
 	}
-    void OnGUI()
-    {
-        if (fastUpdate == true)
-        {
-            if (animated.material.color != colour)
-            {
-                animated.material.color = colour;
-            }
-        }
-    }
+    //void OnGUI()
+    //{
+    //    if (fastUpdate == true)
+    //    {
+    //        if (animated.material.color != colour)
+    //        {
+    //            animated.material.color = colour;
+    //        }
+    //    }
+    //}
 }
