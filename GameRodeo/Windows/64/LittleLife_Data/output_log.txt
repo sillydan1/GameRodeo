@@ -1,0 +1,22 @@
+Initialize engine version: 5.0.1f1 (5a2e8fe35a68)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA Quadro 1000M  (ID=0xdfa)
+    Vendor:   NVIDIA
+    VRAM:     1999 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\XInputDotNetPure.dll (this message is harmless)
+Loading C:\Users\GITZ\Desktop\GameRodeoJam\Windows\64\LittleLife_Data\Managed\XInputDotNetPure.dll into Unity Child Domain
+- Completed reload, in  0.049 seconds
+desktop: 1600x900 50Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
